@@ -1,0 +1,10 @@
+.PageWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #1d7531;
+    box-shadow: inset 0px 0px 193px 0px rgba(59, 59, 59, 0.3); 
+}
