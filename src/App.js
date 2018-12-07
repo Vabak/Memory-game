@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './App.module.css';
-import StartPage from './containers/StartPage';
+import StartPage from './containers/StartPage/StartPage';
 
 class App extends Component {
   render() {
