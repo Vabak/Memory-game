@@ -1,6 +1,6 @@
 import React from 'react';
 
-const cardPath = '../../assets/img/Cards';
+const cardPath = '/Cards/'
 
 const Card = (props) => {
     return (
@@ -8,4 +8,4 @@ const Card = (props) => {
     );
 }
  
-export default Card;
+export default Card; 
