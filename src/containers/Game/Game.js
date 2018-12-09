@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import PageWrapper from '../../wrappers/PageWrapper/PageWrapper';
-import GameLayout from '../GameLayout/GameLayout';
+import GameLayout from '../CardLayout/CardLayout';
 
 class Game extends Component {
     state = { 
         cards: null,
+        isDisabled: true,
+        isFliped: {},
+        flipedCard: null,
     }
     componentWillMount() {
         const cardTypes = ['0', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'J', 'K', 'Q'];
@@ -15,10 +18,7 @@ class Game extends Component {
             cards.push(element);
             cards = cards.filter((v, i, a) => a.indexOf(v) === i);
         }
-        console.log(cards);
         cards.map(card => cards.push(card));
-        console.log(cards);
-
         function randomize(array) {
             var currentIndex = array.length, temporaryValue, randomIndex;
           
@@ -37,6 +37,14 @@ class Game extends Component {
         randomize(cards);
         this.setState({cards: cards})
     }
+
+    cardClickHandler = (id) => {
+        
+    }
+    checkFlip (id) {
+        
+    }
+    
     render() { 
        
         return (
