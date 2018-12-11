@@ -7,8 +7,14 @@ const Card = (props) => {
     return (
         <img 
             className={styles.Card} 
-            alt="Card" src={props.isFliped ? cardPath + props.card + '.png' : cardPath + 'BACK.png' }
-            id={props.id} /> 
+            alt="Card" src={props.isFliped 
+                || props.firstCard === props.id
+                || props.secondCard === props.id ? 
+                cardPath + props.card + '.png' 
+                : cardPath + 'BACK.png' }
+            id={props.id}
+            onClick={() => props.clicked(props.id, props.card)}
+             /> 
     );
 }
  

@@ -8,9 +8,9 @@ class App extends Component {
   render() {
     return (
       <div className={styles.App}>
-        <StartPage />
+        {/* <StartPage /> */}
         <Game />
-        <EndPage />
+        {/* <EndPage /> */}
       </div>
     );
   }
