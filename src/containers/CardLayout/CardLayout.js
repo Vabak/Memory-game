@@ -5,7 +5,7 @@ import styles from './CardLayout.module.css';
 
 const CardLayout = (props) => {
     const cardLayout = props.deck.map((card, index) => (
-        card === null ? <div style={{height: "auto", width: "14%"}} /> :
+        card === null ? <div style={{margin: "10px",display: "inline-block",height: "auto", width: "14%"}} /> :
         <Card 
             key={index} 
             card={card} 
