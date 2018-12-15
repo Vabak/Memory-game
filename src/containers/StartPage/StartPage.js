@@ -6,9 +6,9 @@ import Button from '../../components/Button/Button';
 const StartPage = (props) => {
     return (
         <PageWrapper>
-                <Miniature page='start' />
-                <h1>MEMORY GAME</h1>
-                <Button btnContent='Start' />
+            <Miniature page='start' />
+            <h1>MEMORY GAME</h1>
+            <Button btnContent='Start' />
         </PageWrapper>
     );
 }
