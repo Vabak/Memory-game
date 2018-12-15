@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const Button = (props) => {
     return ( 
-        <Link className={styles.Button} to="/game" >{props.btnContent}</Link>
+        <Link className={styles.Button} to={props.link} >{props.btnContent}</Link>
     );
 }
  

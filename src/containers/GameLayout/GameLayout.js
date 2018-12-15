@@ -1,14 +1,15 @@
 import React from 'react';
 
 import Card from '../../components/Card/Card';
-import styles from './CardLayout.module.css';
+import styles from './GameLayout.module.css';
 
-const CardLayout = (props) => {
+const GameLayout = (props) => {
     const cardLayout = props.deck.map((card, index) => (
-        card === null ? <div style={{margin: "10px",display: "inline-block",height: "auto", width: "14%"}} /> :
         <Card 
-            key={index} 
-            card={card} 
+            key={index}
+            isDisabled={props.isDisabled}
+            isActive={card.isActive} 
+            card={card.card} 
             id={index}
             isFliped={props.flipped}
             clicked={props.clicked}
@@ -24,4 +25,4 @@ const CardLayout = (props) => {
 
 }
 
-export default CardLayout;
+export default GameLayout;

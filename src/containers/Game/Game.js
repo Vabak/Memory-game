@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PageWrapper from '../../wrappers/PageWrapper/PageWrapper';
-import GameLayout from '../CardLayout/CardLayout';
+import GameLayout from '../GameLayout/GameLayout';
+import Score from '../../components/Score/Score';
 
 class Game extends Component {
     state = {
         deck: null,
-        isDisabled: false,
-        isDeckFlipped: false,
+        isDisabled: true,
+        isDeckFlipped: true,
         firstFlipedCard: {
             id: null,
             type: null,
@@ -14,20 +15,22 @@ class Game extends Component {
         secondFlipedCard: {
             id: null,
             type: null,
-        }
+        },
+        score: 0,
+        cardsRemain: 18,
     }
     componentWillMount() {
         const cardTypes = ['0', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'J', 'K', 'Q'];
         const cardSuits = ['C', 'D', 'H', 'S'];
         let deck = [];
         for (; deck.length < 9;) {
-            const element = cardTypes[Math.floor(Math.random() * cardTypes.length)] + cardSuits[Math.floor(Math.random() * cardSuits.length)];
+            const element = {card: cardTypes[Math.floor(Math.random() * cardTypes.length)] + cardSuits[Math.floor(Math.random() * cardSuits.length)], isActive: true};
             deck.push(element);
             deck = deck.filter((v, i, a) => a.indexOf(v) === i);
         }
         deck.map(card => deck.push(card));
         function randomize(array) {
-            var currentIndex = array.length, temporaryValue, randomIndex;
+            let currentIndex = array.length, temporaryValue, randomIndex;
 
             while (0 !== currentIndex) {
 
@@ -43,6 +46,9 @@ class Game extends Component {
         }
         randomize(deck);
         this.setState({ deck: deck })
+    }
+    componentDidMount() {
+        setTimeout(() => this.setState({isDisabled: false, isDeckFlipped: false}), 5000)
     }
 
     cardClickHandler = (id, cardType) => {
@@ -63,41 +69,54 @@ class Game extends Component {
     }
 
     checkPair() {
-        console.log(this.state.firstFlipedCard.type, this.state.secondFlipedCard.type);
         if (this.state.firstFlipedCard.type === this.state.secondFlipedCard.type) {
             this.removeCards();
             return;
         }
-        setTimeout(() => this.setState({ firstFlipedCard: { id: null, type: null }, secondFlipedCard: { id: null, type: null } }), 1500)
+        this.subscribeScore();
+        setTimeout(() => this.setState({ firstFlipedCard: { id: null, type: null }, secondFlipedCard: { id: null, type: null } }), 1000)
     }
 
     removeCards() {
         let newDeck = [...this.state.deck];
-        newDeck[this.state.firstFlipedCard.id] = null;
-        newDeck[this.state.secondFlipedCard.id] = null;
-        this.setState({ deck: newDeck, firstFlipedCard: { id: null, type: null }, secondFlipedCard: { id: null, type: null } }, () => this.checkWin())
-        console.log(newDeck);
+        newDeck[this.state.firstFlipedCard.id].isActive = false;
+        newDeck[this.state.secondFlipedCard.id].isActive = false;
+        this.setState({ deck: newDeck, firstFlipedCard: { id: null, type: null }, secondFlipedCard: { id: null, type: null }, cardsRemain: this.state.cardsRemain - 2 }, () => this.addScore())
+    }
+
+    subscribeScore() {
+        const remain = this.state.cardsRemain;
+        let newScore = this.state.score;
+        newScore = newScore - (remain * 42);
+        this.setState({score: newScore});
+        this.checkWin();
+    }
+
+    addScore() {
+        const remain = this.state.cardsRemain;
+        let newScore = this.state.score;
+        newScore = newScore + (remain * 42);
+        this.setState({score: newScore});
+        this.checkWin();
     }
 
     checkWin() {
-        const deck = [...this.state.deck]
-        let counter = deck.reduce((count, card) => {
-            if (card) return count + 1;
-            return count;
-        }, 0)
-        if (counter === 0) console.log('Win');
+        if (this.state.cardsRemain === 0) this.props.history.push('/end')
     }
 
     render() {
 
         return (
             <PageWrapper>
+                <Score score={this.state.score} />
                 <GameLayout
+                    isDisabled={this.state.isDisabled}
                     deck={this.state.deck}
                     flipped={this.state.isDeckFlipped}
                     clicked={this.cardClickHandler}
                     firstCard={this.state.firstFlipedCard.id}
-                    secondCard={this.state.secondFlipedCard.id} />
+                    secondCard={this.state.secondFlipedCard.id}
+                    score={this.state.score} />
             </PageWrapper>
         );
     }
