@@ -10,9 +10,9 @@ class App extends Component {
   render() {
     return (
       <div className={styles.App}>
-        <Route exact path="/" component={StartPage} />
+        <Route exact path="/" component={StartPage}  />
         <Route path="/game" component={Game} />
-        <Route path="/end" component={EndPage} />
+        <Route  path='/end' component={EndPage} />
       </div>
     );
   }

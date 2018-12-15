@@ -22,12 +22,18 @@ class Game extends Component {
     componentWillMount() {
         const cardTypes = ['0', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'J', 'K', 'Q'];
         const cardSuits = ['C', 'D', 'H', 'S'];
-        let deck = [];
-        for (; deck.length < 9;) {
-            const element = {card: cardTypes[Math.floor(Math.random() * cardTypes.length)] + cardSuits[Math.floor(Math.random() * cardSuits.length)], isActive: true};
-            deck.push(element);
-            deck = deck.filter((v, i, a) => a.indexOf(v) === i);
+        let newDeck = [];
+        for (; newDeck.length < 9;) {
+            const element = cardTypes[Math.floor(Math.random() * cardTypes.length)] + cardSuits[Math.floor(Math.random() * cardSuits.length)];
+            newDeck.push(element);
+            newDeck = newDeck.filter((card, idx, arr) => arr.indexOf(card) === idx);
         }
+        let deck = [];
+        newDeck.map(el => {
+            const card = {card: el, isActive: true}
+            deck.push(card);
+        })
+        console.log(deck);
         deck.map(card => deck.push(card));
         function randomize(array) {
             let currentIndex = array.length, temporaryValue, randomIndex;

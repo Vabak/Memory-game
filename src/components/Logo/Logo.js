@@ -5,7 +5,7 @@ import styles from './Logo.module.css';
 
 // const pathLogo = (name) => import('../../assets/img/Miniatures/' + name + '.png').then(path => path.default);
 
-const miniature = (props) => {
-    return <img className={styles.Logo} alt="Miniature" src={props.page === 'start' ? StartGameLogo : EndGameLogo} />
+const Logo = (props) => {
+    return <img className={styles.Logo} alt="Logo" src={props.page === 'start' ? StartGameLogo : EndGameLogo} />
 }
-export default miniature;
+export default Logo;

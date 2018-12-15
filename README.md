@@ -1,1 +1,1 @@
-Card memory game on react/redux
+Card memory game on react
