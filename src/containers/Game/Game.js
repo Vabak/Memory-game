@@ -20,6 +20,12 @@ class Game extends Component {
         cardsRemain: 18,
     }
     componentWillMount() {
+        this.createDeck();
+    }
+    componentDidMount() {
+        setTimeout(() => this.setState({isDisabled: false, isDeckFlipped: false}), 5000)
+    }
+    createDeck () {
         const cardTypes = ['0', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'J', 'K', 'Q'];
         const cardSuits = ['C', 'D', 'H', 'S'];
         let newDeck = [];
@@ -33,7 +39,6 @@ class Game extends Component {
             const card = {card: el, isActive: true}
             deck.push(card);
         })
-        console.log(deck);
         deck.map(card => deck.push(card));
         function randomize(array) {
             let currentIndex = array.length, temporaryValue, randomIndex;
@@ -52,10 +57,8 @@ class Game extends Component {
         }
         randomize(deck);
         this.setState({ deck: deck })
-    }
-    componentDidMount() {
-        setTimeout(() => this.setState({isDisabled: false, isDeckFlipped: false}), 5000)
-    }
+        }
+        
 
     cardClickHandler = (id, cardType) => {
         if (this.state.isDisabled) return;
@@ -93,7 +96,7 @@ class Game extends Component {
     subscribeScore() {
         const remain = this.state.cardsRemain;
         let newScore = this.state.score;
-        newScore = newScore - (remain * 42);
+        newScore = newScore - ((18 - remain) * 42);
         this.setState({score: newScore});
         this.checkWin();
     }

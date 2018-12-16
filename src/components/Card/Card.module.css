@@ -17,6 +17,16 @@
       transition: transform .2s;
 }
 
+.CardDisabled {
+    height: auto;
+    width: 14%;
+    margin: 8px;
+    position: relative;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+}
+
 .Disabled {
     height: auto;
     width: 14%;

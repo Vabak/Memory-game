@@ -7,8 +7,8 @@ const EndPage = (props) => {
     return (
         <PageWrapper>
             <Logo />
-            <h2>Поздравляем!</h2>
-            <strong>Ваш итоговый счёт: 0</strong>
+            <h2>Congratulations!</h2>
+            <strong>Your score: 0</strong>
             <Button btnContent='Play again' link='/game' />
         </PageWrapper>
     );
