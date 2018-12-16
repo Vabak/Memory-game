@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PageWrapper from '../../wrappers/PageWrapper/PageWrapper';
 import GameLayout from '../GameLayout/GameLayout';
 import Score from '../../components/Score/Score';
+import Button from '../../components/Button/Button'
 
 class Game extends Component {
     state = {
@@ -113,6 +114,12 @@ class Game extends Component {
         if (this.state.cardsRemain === 0) this.props.history.push('/end')
     }
 
+    restartHandler = () => {
+        this.componentWillMount();
+        this.componentDidMount();
+        // this.createDeck();
+        // this.setState({score: 0, cardsRemain: 18});
+    }
     render() {
 
         return (
@@ -126,6 +133,8 @@ class Game extends Component {
                     firstCard={this.state.firstFlipedCard.id}
                     secondCard={this.state.secondFlipedCard.id}
                     score={this.state.score} />
+                    <button onClick={this.restartHandler}>Restart</button>
+                    {/* <Button btnContent="Restart" link="/game" clicked={this.restartHandler}/> */}
             </PageWrapper>
         );
     }
