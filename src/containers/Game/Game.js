@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import PageWrapper from '../../wrappers/PageWrapper/PageWrapper';
 import GameLayout from '../GameLayout/GameLayout';
 import Score from '../../components/Score/Score';
+import * as actions from '../../actions/game'
 
 
 class Game extends Component {
@@ -21,7 +24,7 @@ class Game extends Component {
         // cardsRemain: 18,
     }
     componentWillMount() {
-        this.createDeck();
+        this.props.createDeck();
     }
     componentDidMount() {
         this.addDelay();
@@ -85,7 +88,7 @@ class Game extends Component {
 
     checkPair() {
         if (this.state.firstFlipedCard.type === this.state.secondFlipedCard.type) {
-            this.removeCards();
+            this.props.removeCards(this.state.firstFlipedCard, this.state.secondFlipedCard);
             return;
         }
         this.subscribeScore();
@@ -124,19 +127,20 @@ class Game extends Component {
         this.setState({score: 0, cardsRemain: 18});
         this.addDelay();
     }
-    render() {
 
+    render() {
+        console.log(this.props);
         return (
             <PageWrapper>
                 <Score score={this.state.score} />
                 <GameLayout
                     isDisabled={this.state.isDisabled}
-                    deck={this.state.deck}
+                    deck={this.props.deck}
                     flipped={this.state.isDeckFlipped}
                     clicked={this.cardClickHandler}
                     firstCard={this.state.firstFlipedCard.id}
                     secondCard={this.state.secondFlipedCard.id}
-                    score={this.state.score} />
+                    score={this.props.score} />
                     <button onClick={this.restartHandler}>Restart</button>
                     {/* <Button btnContent="Restart" link="/game" clicked={this.restartHandler}/> */}
             </PageWrapper>
@@ -144,4 +148,18 @@ class Game extends Component {
     }
 }
 
-export default Game;
+const mapDispatchToProps = dispatch => {
+    return {
+        createDeck: () => dispatch(actions.createDeck()),
+        removeCards: (firstCard, secondCard) => dispatch(actions.removeCards())
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        deck: state.deck,
+        score: state.score,
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

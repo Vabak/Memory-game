@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility/utility';
 
 const initialState = {
-    deck: null,
+    deck: [],
     score: 0,
     cardsRemain: 18,
 }
@@ -44,8 +44,8 @@ const createDeck = (state, action) => {
 
 const removeCards = (state, action) => {
     let newDeck = [...state.deck];
-    newDeck[state.firstFlipedCard.id].isActive = false;
-    newDeck[state.secondFlipedCard.id].isActive = false;
+    newDeck[action.firstFlipedCard.id].isActive = false;
+    newDeck[action.secondFlipedCard.id].isActive = false;
     return updateObject(state, { deck: newDeck })
 }
 
@@ -58,8 +58,8 @@ const addScore = (state, action) => {
 }
 
 const subscribeScore = (state, action) => {
-    const remain = this.state.cardsRemain;
-    let newScore = this.state.score;
+    const remain = state.cardsRemain;
+    let newScore = state.score;
     newScore = newScore - ((18 - remain) * 42);
     return updateObject( state, {score: newScore})
 }

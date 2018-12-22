@@ -6,9 +6,11 @@ export const createDeck = () => {
     }
 }
 
-export const removeCards = () => {
+export const removeCards = (firstCard, secondCard) => {
     return {
-        type: actionTypes.REMOVE_CARDS
+        type: actionTypes.REMOVE_CARDS,
+        firstCard: firstCard,
+        secondCard: secondCard
     }
 }
 
