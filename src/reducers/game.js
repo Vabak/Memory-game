@@ -42,18 +42,24 @@ const createDeck = (state, action) => {
     return updateObject(state, { deck: deck });
 }
 
+const resetScore = (state, action) => {
+    return updateObject(state, {score: 0, cardsRemain: 18} )
+}
+
 const removeCards = (state, action) => {
     let newDeck = [...state.deck];
-    newDeck[action.firstFlipedCard.id].isActive = false;
-    newDeck[action.secondFlipedCard.id].isActive = false;
+    console.log(action);
+    newDeck[action.firstCard.id].isActive = false;
+    newDeck[action.secondCard.id].isActive = false;
     return updateObject(state, { deck: newDeck })
 }
 
 const addScore = (state, action) => {
-    const remain = state.cardsRemain;
+    let remain = state.cardsRemain;
     let newScore = state.score;
     newScore = newScore + (remain * 42);
-    return updateObject( state, {score: newScore})
+    remain -= 2; 
+    return updateObject( state, {score: newScore, cardsRemain: remain})
 
 }
 
@@ -70,6 +76,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.REMOVE_CARDS: return removeCards(state, action);
         case actionTypes.ADD_SCORE: return addScore(state, action);
         case actionTypes.SUBSCRIBE_SCORE: return subscribeScore(state, action);
+        case actionTypes.RESET_SCORE: return resetScore(state, action);
         default: return state;
     }
 }

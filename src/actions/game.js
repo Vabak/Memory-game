@@ -6,6 +6,12 @@ export const createDeck = () => {
     }
 }
 
+export const resetScore = () => {
+    return {
+        type: actionTypes.RESET_SCORE
+    }
+}
+
 export const removeCards = (firstCard, secondCard) => {
     return {
         type: actionTypes.REMOVE_CARDS,

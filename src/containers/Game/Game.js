@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import PageWrapper from '../../wrappers/PageWrapper/PageWrapper';
 import GameLayout from '../GameLayout/GameLayout';
 import Score from '../../components/Score/Score';
-import * as actions from '../../actions/game'
+import styles from '../../components/Button/Button.module.css'
+import * as actions from '../../actions/game';
 
 
 class Game extends Component {
@@ -30,8 +31,9 @@ class Game extends Component {
         this.addDelay();
     }
 
-    addDelay () {
-        setTimeout(() => this.setState({isDisabled: false, isDeckFlipped: false}), 5000)
+    addDelay() {
+        this.setState({ isDisabled: true, isDeckFlipped: true })
+        setTimeout(() => this.setState({ isDisabled: false, isDeckFlipped: false }), 5000)
     }
 
     // createDeck () {
@@ -67,7 +69,7 @@ class Game extends Component {
     //     randomize(deck);
     //     this.setState({ deck: deck })
     //     }
-        
+
 
     cardClickHandler = (id, cardType) => {
         if (this.state.isDisabled) return;
@@ -82,17 +84,19 @@ class Game extends Component {
         if (id === this.state.firstFlipedCard.id) {
             return;
         }
-        this.setState({ secondFlipedCard: { id: id, type: cardType } }, () =>this.checkPair());
+        this.setState({ secondFlipedCard: { id: id, type: cardType } }, () => this.checkPair());
 
     }
 
     checkPair() {
         if (this.state.firstFlipedCard.type === this.state.secondFlipedCard.type) {
             this.props.removeCards(this.state.firstFlipedCard, this.state.secondFlipedCard);
+            this.props.addScore();
+            this.setState({ firstFlipedCard: { id: null, type: null }, secondFlipedCard: { id: null, type: null } }, () => this.checkWin())
             return;
         }
-        this.subscribeScore();
         setTimeout(() => this.setState({ firstFlipedCard: { id: null, type: null }, secondFlipedCard: { id: null, type: null } }), 1000)
+        this.props.subscribeScore();
     }
 
     // removeCards() {
@@ -119,20 +123,21 @@ class Game extends Component {
     // }
 
     checkWin() {
-        if (this.state.cardsRemain === 0) this.props.history.push('/end')
+        if (this.props.cardsRemain === 0) this.props.history.push('/end')
     }
 
     restartHandler = () => {
-        this.createDeck();
-        this.setState({score: 0, cardsRemain: 18});
+        this.props.createDeck();
         this.addDelay();
+        this.setState({ firstFlipedCard: { id: null, type: null }, secondFlipedCard: { id: null, type: null } });
+        this.props.resetScore();
+        
     }
 
     render() {
-        console.log(this.props);
         return (
             <PageWrapper>
-                <Score score={this.state.score} />
+                <Score score={this.props.score} />
                 <GameLayout
                     isDisabled={this.state.isDisabled}
                     deck={this.props.deck}
@@ -141,8 +146,7 @@ class Game extends Component {
                     firstCard={this.state.firstFlipedCard.id}
                     secondCard={this.state.secondFlipedCard.id}
                     score={this.props.score} />
-                    <button onClick={this.restartHandler}>Restart</button>
-                    {/* <Button btnContent="Restart" link="/game" clicked={this.restartHandler}/> */}
+                <button className={styles.Button} onClick={this.restartHandler}>Restart</button>
             </PageWrapper>
         );
     }
@@ -151,7 +155,10 @@ class Game extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         createDeck: () => dispatch(actions.createDeck()),
-        removeCards: (firstCard, secondCard) => dispatch(actions.removeCards())
+        removeCards: (firstCard, secondCard) => dispatch(actions.removeCards(firstCard, secondCard)),
+        addScore: () => dispatch(actions.addScore()),
+        subscribeScore: () => dispatch(actions.subscribeScore()),
+        resetScore: () => dispatch(actions.resetScore()),
     }
 }
 
@@ -159,6 +166,7 @@ const mapStateToProps = state => {
     return {
         deck: state.deck,
         score: state.score,
+        cardsRemain: state.cardsRemain,
     }
 }
 
