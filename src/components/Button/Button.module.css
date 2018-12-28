@@ -1,0 +1,19 @@
+.Button {
+    font-size: 16px;
+    line-height: 22px;
+    color: #1C7430;
+    background-color: #FFFFFF;
+    width: 128px;
+    height: 42px;
+    border: solid #FFFFFF;
+    border-radius: 4px;
+    opacity: 0.85;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
+    padding-top: 8px;
+    margin: 10px;
+}
