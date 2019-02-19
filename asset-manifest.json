@@ -1,15 +1,15 @@
 {
-  "main.css": "/Vabak/Memory-game/static/css/main.c8048924.chunk.css",
-  "main.js": "/Vabak/Memory-game/static/js/main.4e722ce8.chunk.js",
-  "main.js.map": "/Vabak/Memory-game/static/js/main.4e722ce8.chunk.js.map",
-  "static/js/1.3598e9fb.chunk.js": "/Vabak/Memory-game/static/js/1.3598e9fb.chunk.js",
-  "static/js/1.3598e9fb.chunk.js.map": "/Vabak/Memory-game/static/js/1.3598e9fb.chunk.js.map",
-  "runtime~main.js": "/Vabak/Memory-game/static/js/runtime~main.fad43950.js",
-  "runtime~main.js.map": "/Vabak/Memory-game/static/js/runtime~main.fad43950.js.map",
-  "static/media/StartGame@2x.png": "/Vabak/Memory-game/static/media/StartGame@2x.fa6b4a54.png",
-  "static/media/Group 2@2x.png": "/Vabak/Memory-game/static/media/Group 2@2x.976f641a.png",
-  "static/css/main.c8048924.chunk.css.map": "/Vabak/Memory-game/static/css/main.c8048924.chunk.css.map",
-  "index.html": "/Vabak/Memory-game/index.html",
-  "precache-manifest.6cea1c7a17dd5b58439fb0e1a9133e2e.js": "/Vabak/Memory-game/precache-manifest.6cea1c7a17dd5b58439fb0e1a9133e2e.js",
-  "service-worker.js": "/Vabak/Memory-game/service-worker.js"
+  "main.css": "/Memory-game/static/css/main.c8048924.chunk.css",
+  "main.js": "/Memory-game/static/js/main.da080b80.chunk.js",
+  "main.js.map": "/Memory-game/static/js/main.da080b80.chunk.js.map",
+  "static/js/1.3598e9fb.chunk.js": "/Memory-game/static/js/1.3598e9fb.chunk.js",
+  "static/js/1.3598e9fb.chunk.js.map": "/Memory-game/static/js/1.3598e9fb.chunk.js.map",
+  "runtime~main.js": "/Memory-game/static/js/runtime~main.147b1597.js",
+  "runtime~main.js.map": "/Memory-game/static/js/runtime~main.147b1597.js.map",
+  "static/media/StartGame@2x.png": "/Memory-game/static/media/StartGame@2x.fa6b4a54.png",
+  "static/media/Group 2@2x.png": "/Memory-game/static/media/Group 2@2x.976f641a.png",
+  "static/css/main.c8048924.chunk.css.map": "/Memory-game/static/css/main.c8048924.chunk.css.map",
+  "index.html": "/Memory-game/index.html",
+  "precache-manifest.73c74a2f76811823ab0808d751b6d3d9.js": "/Memory-game/precache-manifest.73c74a2f76811823ab0808d751b6d3d9.js",
+  "service-worker.js": "/Memory-game/service-worker.js"
 }

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/Vabak/Memory-game/precache-manifest.6cea1c7a17dd5b58439fb0e1a9133e2e.js"
+  "/Memory-game/precache-manifest.73c74a2f76811823ab0808d751b6d3d9.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/Vabak/Memory-game/index.html", {
+workbox.routing.registerNavigationRoute("/Memory-game/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
